@@ -206,11 +206,14 @@ class Transformer:
         """
         tokens_concat = ''
         tokens_list = query_elements[common_field]
-
+        print("concat_symbols:", tokens_list)
         for index, token_path in enumerate(tokens_list):
+            print(index)
+            print(token_path)
             token = dict_digger.dig(
                 element,
                 *token_path)
+            print(token)
             tokens_concat += token
             if(index + 1) < len(tokens_list):
                 tokens_concat += '/'

@@ -29,6 +29,14 @@ class Querys:
             }}
         """
 
+    QUERY_ID_ELEMENT = """{{
+            {entity_name}(
+                    id: {id}
+                ){{
+                    {attributes}
+                }}
+            }}
+        """
     QUERY_ELEMENT_FILTER = """ {{
             {entity_name}(
                     first: 1000

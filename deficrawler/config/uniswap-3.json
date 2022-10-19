@@ -162,7 +162,7 @@
       },
       "transformations": {}
     },
-    "pool": {
+    "pools": {
       "attributes": {
         "id": [
           "id"
@@ -194,6 +194,48 @@
       },
       "transformations": {
         "pool_tokens": "concat_symbols"
+      }
+    },
+    "pool": {
+      "attributes": {
+        "id": [
+          "id"
+        ],
+        "token0": [
+          "token0",
+          "symbol"
+        ],
+        "token1": [
+          "token1",
+          "symbol"
+        ],
+        "created_at": [
+          "createdAtTimestamp"
+        ],
+        "liquidity_usd": [
+          "totalValueLockedUSD"
+        ],
+        "token0Price" : [
+          "token0Price"
+        ],
+        "token1Price": [
+          "token1Price"
+        ],
+        "volumeToken0": [
+          "volumeToken0"
+        ],
+        "volumeToken1": [
+          "volumeToken1"
+        ]
+      },
+      "query": {
+        "name": "pool",
+        "extra_fields": {},
+        "params": {
+          "id": "id"
+        }
+      },
+      "transformations": {
       }
     }
   }

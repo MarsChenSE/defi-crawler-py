@@ -14,6 +14,8 @@ def get_attributes(entity, map_file):
         list_attr += format_attribute(value) + " "
     return list_attr
 
+def get_id(id):
+    return "\"" + id + "\"\n"
 
 def get_filters(filter_dict):
     """

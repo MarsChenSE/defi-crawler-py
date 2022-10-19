@@ -1,6 +1,6 @@
 from deficrawler.querys import Querys
 from deficrawler.mappers import Mappers
-from deficrawler.api_calls import get_data_from, get_data_parameter, get_data_filtered, get_first_element
+from deficrawler.api_calls import get_data_from, get_data_parameter, get_data_filtered, get_first_element, get_data_id
 
 import pkgutil
 import json
@@ -15,6 +15,7 @@ class ProtocolBase:
         self.protocol = protocol
         self.query_from_timestamp = Querys.QUERY_FROM_TIMESTAMP
         self.query_all_elements = Querys.QUERY_ALL_ELEMENTS
+        self.query_id_element = Querys.QUERY_ID_ELEMENT
         self.query_filter = Querys.QUERY_ELEMENT_FILTER
         self.query_first = Querys.QUERY_FIRST_ELEMENT
         self.query_block = Querys.QUERY_ELEMENTS_BLOCK
@@ -46,6 +47,15 @@ class ProtocolBase:
                                   entity=entity,
                                   mappings_file=self.mappings_file,
                                   endpoint=self.endpoint)
+    def query_data_id(self, entity, id):
+        """
+        Return data for the given entity and id
+        """
+        return get_data_id(query_input=self.query_id_element,
+                           entity=entity,
+                           mappings_file=self.mappings_file,
+                           endpoint=self.endpoint,
+                           id=id)
 
     def query_data_filtered(self, entity, filters):
         """
@@ -147,7 +157,7 @@ class ProtocolBase:
                                 ' version ' + str(version) + ' not supported')
         except:
             raise
-
+        # print(config_file)
         return json.loads(config_file.decode())
 
     def __get_protocol_endpoint(self, chain):

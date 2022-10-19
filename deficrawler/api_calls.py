@@ -1,4 +1,4 @@
-from deficrawler.utils import get_attributes, get_filters, filter_method
+from deficrawler.utils import get_attributes, get_filters, filter_method, get_id
 
 import requests
 import json
@@ -75,7 +75,37 @@ def get_data_parameter(query_input, entity, mappings_file, endpoint):
             json_records = [*json_records, *list_data]
         else:
             are_data = False
+    print(json_records)
+    return json_records
 
+def get_data_id(query_input, entity, mappings_file, endpoint, id):
+    """
+    Gets all the existing data for the given entity.
+    If this entity has some filter, in the config file, the query will apply
+    this filter
+    """
+    entity_name = mappings_file['entities'][entity]['query']['name']
+    attributes = get_attributes(entity, mappings_file)
+    id_str = get_id(id)
+
+    query = query_input.format(
+        entity_name=entity_name,
+        id=id_str,
+        attributes=attributes
+    )
+    print(query)
+    json_data = call_api(endpoint=endpoint, query=query)
+    # print(json_data)
+    json_records = []
+
+    response_lenght = len(json_data['data'][entity_name])
+    if (response_lenght > 0):
+        list_data = json_data['data'][entity_name]
+        print("list data")
+        print(list_data)
+        json_records.append(list_data)
+    print("json_record is:", json_records)
+    print("token0: ", json_records[0])
     return json_records
 
 

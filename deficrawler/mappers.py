@@ -15,8 +15,10 @@ class Mappers:
         transformer = Transformer()
 
         for ele in response_data:
+            print("ele: ",ele)
             element = {}
             for common_field, protocol_field in attributes.items():
+                print("common field is", common_field)
                 element[common_field] = (
                     transformer.transform(
                         element=ele,
