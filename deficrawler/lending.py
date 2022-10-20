@@ -140,6 +140,23 @@ class Lending(ProtocolBase):
             config=config
         )
 
+    def get_market(self, poolAddress):
+        """
+        Returns the market
+        """
+
+        config = super().get_protocol_config('market')
+        response_data = super().query_data_id(
+            entity='market',
+            id=poolAddress
+        )
+        print(type(response_data))
+        print("response_data:",response_data)
+        return super().map_data(
+            response_data=response_data,
+            config=config
+        )
+
     def supported_entities(self):
         """
         Returns the supported entities for the protocol

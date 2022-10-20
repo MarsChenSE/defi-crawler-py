@@ -271,6 +271,46 @@
         "supply_rate": "rates_units_comp"
       }
     },
+    "market": {
+      "attributes": {
+        "token": [
+          "underlyingSymbol"
+        ],
+        "reserve": [
+          "reserves"
+        ],
+        "supplyRate": [
+          "supplyRate"
+        ],
+        "variable_borrow_rate": [
+          "borrowRate"
+        ],
+        "stable_borrow_rate": [
+          "borrowRate"
+        ],
+        "total_borrow": [
+          "totalBorrows"
+        ],
+        "total_supply": [
+          "totalSupply"
+        ],
+        "supply_rate": [
+          "supplyRate"
+        ],
+        "timestamp": [
+          "blockTimestamp"
+        ]
+      },
+      "query": {
+        "name": "market",
+        "extra_fields": {},
+        "params": {
+          "id": "id"
+        }
+      },
+      "transformations": {
+      }
+    },
     "prices": {
       "attributes": {
         "id": [
