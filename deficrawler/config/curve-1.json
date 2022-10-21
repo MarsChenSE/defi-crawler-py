@@ -1,0 +1,62 @@
+{
+  "protocol": {
+    "name": "Curve",
+    "type": "Descentralized Exchange",
+    "version": 1,
+    "chain": "Ethereum",
+    "endpoint": {
+      "ethereum": "https://api.thegraph.com/subgraphs/name/ldcduc/curvefi-subgraph"
+    }
+  },
+  "entities": {
+    "pool": {
+      "attributes": {
+        "poolAddress": [
+          "id"
+        ],
+        "poolName": [
+          "name"
+        ],
+        "lpTokenAddress": [
+          "lpToken",
+          "id"
+        ],
+        "lpTokenSymbol": [
+          "lpToken",
+          "symbol"
+        ],
+        "Pool_Coins": [
+          [
+            "coins",
+            "id"
+          ],
+          [
+            "coins",
+            "token",
+            "symbol"
+          ],
+          [
+            "coins",
+            "balance"
+          ]
+        ],
+        "underlyingCount": [
+          "underlyingCount"
+        ],
+        "virtualPrice": [
+          "virtualPrice"
+        ]
+      },
+      "query": {
+        "name": "pool",
+        "extra_fields": {},
+        "params": {
+          "id": "id"
+        }
+      },
+      "transformations": {
+        "Pool_Coins": "aggregate_curve_data"
+      }
+    }
+  }
+}

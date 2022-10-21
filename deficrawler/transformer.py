@@ -37,7 +37,8 @@ class Transformer:
             "rates_na": self.rates_na,
             "to_int": self.to_int,
             "na": self.na,
-            "exchange_rate_one": self.exchange_rate_one
+            "exchange_rate_one": self.exchange_rate_one,
+            "aggregate_curve_data": self.aggregate_curve_data
         }
 
     def transform(self, element, common_field, protocol_field, transformations, query_elements):
@@ -46,8 +47,12 @@ class Transformer:
         contained in the class dictionary, the specified function will be applied, in other case
         the value will be returned without modification.
         """
+        # print("common_field: ", common_field)
+        # print(transformations)
         if common_field in transformations:
+            # print(common_field)
             type_transformer = transformations[common_field]
+            # print(type_transformer)
             return self.transformers[type_transformer](common_field, element, protocol_field, query_elements)
         else:
             return dict_digger.dig(
@@ -351,3 +356,31 @@ class Transformer:
         Returns one for pegged tokens
         """
         return 1
+
+    def aggregate_curve_data(self, common_field, element, protocol_field, query_elements):
+        """
+        :return: the aggregated result of coin date
+        """
+        # print("Begin aggregate_curve_data")
+        # print(common_field)
+        # print(element)
+        # print(protocol_field)
+        # print("query ele : ",query_elements)
+        underlyingCount = int(element["underlyingCount"])
+        result = []
+        coins = element["coins"]
+        coinpaths = query_elements[common_field]
+        for i in range(underlyingCount):
+            coin = {}
+            for index, coinquery in enumerate(coinpaths):
+                # print(index)
+                coinquery = coinquery[1:]
+                # print(coinquery)
+                coindata = dict_digger.dig(
+                    element["coins"][i],
+                    *coinquery)
+                coin[coinquery[-1]] = coindata
+                # print(coindata)
+            # print(coin)
+            result.append(coin)
+        return result

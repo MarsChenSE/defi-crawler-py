@@ -74,8 +74,8 @@ class Dex(ProtocolBase):
             entity='pool',
             id=poolAddress
         )
-        print(type(response_data))
-        print("response_data:",response_data)
+        # print(type(response_data))
+        # print("response_data:",response_data)
         return super().map_data(
             response_data=response_data,
             config=config

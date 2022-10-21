@@ -8,9 +8,11 @@ def get_attributes(entity, map_file):
     extra fields (if exists) to create the query
     """
     list_attr = ''
+    # print("map_file in get_attributes is:", map_file)
     attributes = map_file['entities'][entity]['query']['extra_fields']
     attributes.update(map_file['entities'][entity]['attributes'])
     for attribute, value in attributes.items():
+        # print("for loop")
         list_attr += format_attribute(value) + " "
     return list_attr
 
@@ -60,12 +62,15 @@ def format_attribute(list_fields):
     strings for each list
     """
     str_list_attr = ""
-
+    # print("list_fields:", list_fields)
     if(isinstance(list_fields[0], list)):
         for list_elements in list_fields:
+            # print(list_elements)
             str_list_attr += format_element(list_elements) + " "
+            # print(str_list_attr)
     else:
         str_list_attr += format_element(list_fields)
+        # print(str_list_attr)
     return str_list_attr
 
 
